@@ -46,7 +46,7 @@ class Counter extends React.Component {
             onPress={() => this.props.login()}
             style={styles.loginButton}
           />
-          <Text style={styles.loggedInText}>{`${(this.props.userData && this.props.userData.payload) ? this.props.userData.payload.user : '...'}`}</Text>
+          <Text style={styles.loggedInText}>{`${(this.props.userData && this.props.userData.token) ? this.props.userData.token : 'Not logged'}`}</Text>
           <Button
             title="Get Role"
             onPress={() => this.props.getRole()}
@@ -167,7 +167,7 @@ const mapDispatchToProps = (dispatch) => {
     }),
     login: () => dispatch({
       type: 'USER_LOGIN',
-      username: "hans.rasch",
+      username: "hansrasch",
       password: "Hrasch22..."
     }),
     getRole: () => dispatch({

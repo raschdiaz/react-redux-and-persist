@@ -7,7 +7,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga'
 
 // Imports: Redux
-import rootReducer from '../reducers/index';
+import rootReducer from './reducers';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware()
