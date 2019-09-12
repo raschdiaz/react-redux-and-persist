@@ -18,57 +18,59 @@ class Counter extends React.Component {
       newItem: text
     })
   }
-/**
- * <Button
-            title="Add user"
-            onPress={() => this.props.addUser(this.state.newItem)}
-            style={styles.loginButton}
-          />
-          {/*this.props.userlist.map((item, key) => (
-            <Text>- {item}</Text>
-          ))*/
+  /**
+   * <Button
+              title="Add user"
+              onPress={() => this.props.addUser(this.state.newItem)}
+              style={styles.loginButton}
+            />
+            {/*this.props.userlist.map((item, key) => (
+              <Text>- {item}</Text>
+            ))*/
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
 
-        <View style={styles.loggedInContainer}>
-          <Text style={styles.loggedInText}>Logged In: </Text>
-          <Text style={styles.loggedInText}>{`${this.props.loggedIn}`}</Text>
+        <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
 
-          <Button
-            title="Login"
-            onPress={this.props.loggedIn === false ? () => this.props.reduxLogin(true) : () => this.props.reduxLogin(false)}
-            style={styles.loginButton}
-          />
-          <Button
-            title="Login Test"
-            onPress={() => this.props.login()}
-            style={styles.loginButton}
-          />
-          <Text style={styles.loggedInText}>{`${(this.props.userData && this.props.userData.token) ? this.props.userData.token : 'Not logged'}`}</Text>
-          <Button
-            title="Get Role"
-            onPress={() => this.props.getRole()}
-            style={styles.loginButton}
-          />
-          <Text style={styles.loggedInText}>{`${(this.props.role.name) ? this.props.role.name : 'Waiting role name...'}`}</Text>
-          <TextInput 
-            onChangeText={text => onChangeText(text)}
-            value={this.state.newItem}
-          />
-          
+          <Text style={styles.counterTitle}>{`Phone its: ${(this.props.isConnected) ? 'ONLINE' : 'OFFLINE'}`}</Text>
+
+          <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
+            <Button
+              title="Login Switch"
+              onPress={this.props.loggedIn === false ? () => this.props.reduxLogin(true) : () => this.props.reduxLogin(false)}
+              style={styles.loginButton}
+            />
+            <Text style={[styles.loggedInText, { marginLeft: 10 }]}>Logged In: {`${this.props.loggedIn}`}</Text>
+          </View>
+
+          <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginTop: 10 }}>
+            <Button
+              title="Login Test"
+              onPress={() => this.props.login()}
+              style={styles.loginButton}
+            />
+            <Text style={styles.loggedInText}>{`${(this.props.userData && this.props.userData.token) ? `Token: ${this.props.userData.token}` : 'Not logged'}`}</Text>
+          </View>
+
+          <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: 10 }}>
+            <Button
+              title="Get Role"
+              onPress={() => this.props.getRole()}
+              style={styles.loginButton}
+            />
+            <Text style={[styles.loggedInText, { marginLeft: 10 }]}>{`${(this.props.role.name) ? this.props.role.name : 'Waiting role name...'}`}</Text>
+          </View>
+
         </View>
 
         <Text style={styles.counterTitle}>Counter</Text>
-
         <View style={styles.counterContainer}>
           <TouchableOpacity onPress={() => this.props.reduxIncreaseCounter()}>
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
-
           <Text style={styles.counterText}>{this.props.counter}</Text>
-
           <TouchableOpacity onPress={() => this.props.reduxDecreaseCounter()}>
             <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
@@ -142,7 +144,8 @@ const mapStateToProps = (state) => {
     loggedIn: state.authReducer.loggedIn,
     userData: state.authReducer.response,
     role: state.roleReducer.role,
-    userList: state.authReducer.userList
+    userList: state.authReducer.userList,
+    isConnected: state.networkConnectivityReducer.isConnected,
   };
 };
 
